@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PlayFast — Smarter Lacrosse Training</title>
+  <meta name="description" content="Play Fast is a lightweight wearable for any lacrosse stick. Track reps, analyze throws and catches, and get real-time insights. Join the waitlist." />
+  <meta property="og:title" content="Play Fast — Smarter Lacrosse Training" />
+  <meta property="og:description" content="Attach it to any lacrosse stick. Measure. Improve. Dominate. Join the waitlist." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="playfast-icon-1024.png" />
+
+  <!-- Favicon links - adjust paths as needed -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0b3d0b;
+      --muted:#437a43;
+      --brand:#2ecc71;
+      --brand-2:#145a32;
+      --accent:#00b894;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;padding:0;font-family:Inter,system-ui;background:var(--bg);color:var(--text)}
+    .container{max-width:1120px;margin:0 auto;padding:24px}
+    .nav{display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--brand-2);font-size:22px;text-decoration:none}
+    .logo img{height:48px;width:auto;border-radius:8px;display:block}
+    .cta{border:2px solid var(--brand);padding:10px 20px;border-radius:10px;text-decoration:none;color:var(--brand-2);font-weight:600;font-size:18px;transition:.2s}
+    .cta:hover{background:var(--brand);color:var(--bg)}
+
+    .hero{
+      position:relative;
+      height:85vh;
+      min-height:500px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:20px;
+      color:#fff;
+      overflow:hidden;
+    }
+    .hero h1{font-size:clamp(36px,5vw,64px);margin:0 0 12px;text-shadow:0 2px 10px rgba(0,0,0,0.5)}
+    .hero .lead{font-size:clamp(18px,2.5vw,22px);max-width:56ch;margin:0 0 24px;text-shadow:0 1px 5px rgba(0,0,0,0.5);color:rgba(255,255,255,0.95)}
+    .hero .cta{background:var(--brand);color:var(--bg);border-color:var(--brand);font-size:20px;padding:12px 28px}
+    .hero .cta:hover{opacity:0.9;transform:translateY(-1px)}
+
+    .hero-video{position:absolute;top:0;left:0;width:100%;height:100%;z-index:-2}
+    .hero-video video{width:100%;height:100%;object-fit:cover}
+    .hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(11,61,11,0.5);z-index:-1}
+
+    .features{margin:60px 0 10px}
+    .features h2{font-size:28px;color:var(--brand-2);margin:0 0 14px}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:feature-counter}
+    @media(max-width:900px){.feature-grid{grid-template-columns:1fr}}
+    .card{
+      background:#ffffff;
+      padding:20px;
+      counter-increment:feature-counter;
+      position:relative;
+      padding-top:48px;
+    }
+    .card::before{content:"0" counter(feature-counter);position:absolute;top:10px;left:20px;font-size:24px;font-weight:800;color:var(--muted);opacity:0.6}
+    .card .icon{display:none} /* Hide old icons */
+    .card h3{margin:0;color:var(--brand-2);font-size:20px;line-height:1.3}
+    .card p{margin:6px 0 0;color:#2f5130;font-size:16px;line-height:1.45}
+
+    /* New styles for image feature sections */
+    .image-feature-section {
+      padding: 80px 0;
+      background: var(--bg); /* Default background */
+    }
+    .image-feature-section:nth-of-type(odd) { /* Apply a subtle background to every other section */
+      background: #f9f9f9;
+    }
+    .image-feature-section .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    /* For alternating image/text layout */
+    .image-feature-section.reverse .text-content {
+      order: 2;
+    }
+    .image-feature-section.reverse .image-content {
+      order: 1;
+    }
+    @media (max-width: 900px) {
+      .image-feature-section .content-wrapper,
+      .image-feature-section.reverse .content-wrapper {
+        grid-template-columns: 1fr; /* Stack columns on mobile */
+        .text-content, .image-content { order: unset; } /* Reset order for mobile */
+      }
+    }
+    .image-feature-section .text-content h2 { font-size: 36px; color: var(--brand-2); margin-bottom: 20px; }
+    .image-feature-section .text-content p { font-size: 18px; line-height: 1.6; color: var(--muted); }
+    .image-feature-section .image-content { text-align: center; }
+    .image-feature-section .image-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    }
+
+    .signup{
+      margin:100px auto;
+      padding:48px;
+      max-width:700px;
+      background:#ffffff;
+      border-radius:24px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+      text-align:center;
+    }
+    .signup h2{font-size:32px;margin-bottom:12px;color:var(--brand-2)}
+    .signup p{
+      font-size:18px;color:var(--muted);max-width:45ch;margin:0 auto 28px;
+
+    }
+    form{display:grid;gap:16px;font-size:18px;text-align:left}
+    input,select,textarea{padding:16px;border-radius:12px;border:1px solid #ccc;background:#fcfdff;color:var(--text);font-size:17px;transition:border-color .2s, box-shadow .2s}
+    input::placeholder{color:#888}
+    input:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(46,204,113,0.15)}
+    button{background:var(--brand-2);border:none;padding:18px 24px;border-radius:12px;font-weight:700;cursor:pointer;color:#ffffff;font-size:20px;transition:.3s;width:100%}
+    button:hover{opacity:0.9;transform:translateY(-1px)}
+
+    footer{font-size:14px;color:var(--muted);text-align:center;margin:40px 0}
+    @media (max-width: 600px) {
+      form > div{grid-template-columns: 1fr;}
+    }
+    .legal{max-width:800px;margin:20px auto;padding:10px;font-size:14px;line-height:1.6;color:var(--muted)}
+    .legal a{color:var(--brand)}
+  </style>
+  <style>
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 61, 11, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: #ffffff;
+      padding: 50px;
+      border-radius: 24px;
+      text-align: center;
+      max-width: 550px;
+      color: var(--brand-2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+    .modal-content h2 { font-size: clamp(40px, 6vw, 64px); margin: 0 0 10px; line-height: 1.1; }
+    .modal-content p { font-size: 18px; color: var(--muted); max-width: 35ch; margin: 0 auto 28px; }
+    .modal-content .modal-close { background: var(--brand-2); color: #fff; border: none; padding: 14px 32px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 18px; transition: .3s; }
+    .modal-content .modal-close:hover { opacity: 0.9; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <a href="/" class="logo"><img src="playfast-icon-1024.png" alt="Play Fast logo"><span>Play Fast</span></a>
+      <a class="cta" href="#signup">Join Waitlist</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-video">
+      <video id="heroVideo" autoplay muted loop playsinline poster="poster.jpg">
+        <source src="pf_web.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+      <h1>Smarter reps. Faster improvement.</h1>
+      <p class="lead">Play Fast is a lightweight wearable that attaches to any lacrosse stick to track reps, analyze throws and catches, and deliver instant feedback through the mobile app.</p>
+      <a href="#signup" class="cta">Join the waitlist →</a>
+  </section>
+
+  <main class="container">
+    <section aria-labelledby="features" class="features">
+      <h2 id="features">Why Play Fast?</h2>
+      <div class="feature-grid">
+        <div class="card"><div class="icon">🏑</div><div><h3>Secure, universal mount</h3><p>Low-profile clamp locks to any standard shaft—no tools, no wobble, game-ready.</p></div></div>
+        <div class="card"><div class="icon">⚡</div><div><h3>On-device action recognition</h3><p>Motion ML detects reps, throws, catches, and cradles—even when the phone isn’t nearby.</p></div></div>
+        <div class="card"><div class="icon">📊</div><div><h3>Metrics that matter</h3><p>Track volume, intensity, and consistency. Turn sessions into progress you can see.</p></div></div>
+        <div class="card"><div class="icon">📶</div><div><h3>Phone-free sessions</h3><p>Record drills untethered. Data syncs automatically when you reconnect.</p></div></div>
+        <div class="card"><div class="icon">🏅</div><div><h3>Coach mode</h3><p>See team-wide trends and share highlights. Identify what’s working—fix what isn’t.</p></div></div>
+        <div class="card"><div class="icon">💪</div><div><h3>Rugged & weather-ready</h3><p>Impact-resistant shell with water/sweat protection for practice and game day.</p></div></div>
+      </div>
+    </section>
+
+    <!-- Hardware Feature Section -->
+    <section class="image-feature-section">
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="text-content">
+            <h2>Built for the Game. Ready for Anything.</h2>
+            <p>The Play Fast sensor features a rugged, low-profile design that’s built to withstand the demands of the game. Our universal clamp mount attaches securely to any standard lacrosse shaft in seconds—no tools required, no wobble, just a solid connection.</p>
+            <p>Inside, powerful on-device machine learning captures every movement with precision. It’s impact-resistant, weather-ready, and designed to perform when you do.</p>
+          </div>
+          <div class="image-content">
+            <img src="pf_device.png" alt="Play Fast sensor mounted securely on a lacrosse stick shaft">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Example Image Feature Section 2 (with reversed layout) -->
+    <section class="image-feature-section reverse">
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="text-content">
+            <h2>Track Your Reps, Dominate Your Game</h2>
+            <p>Every session is recorded and analyzed, giving you a clear picture of your performance over time. See how your speed, accuracy, and consistency improve with Play Fast. Share your achievements with coaches and teammates.</p>
+            <p>Set goals, track milestones, and unlock your full potential. The data doesn't lie—get smarter, get faster, get better.</p>
+          </div>
+          <div class="image-content">
+            <img src="pf_screens.png" alt="Screenshot of Play Fast mobile app showing progress tracking">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="signup" class="signup">
+      <h2 style="color:var(--brand-2)">Get early access</h2>
+      <p>Be the first to know when Play Fast launches. Join the waitlist for exclusive updates and early access opportunities.</p>
+      <form id="waitlistForm" novalidate>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <input type="text" name="fname" id="fname" placeholder="First name" autocomplete="given-name" required>
+          <input type="text" name="lname" id="lname" placeholder="Last name" autocomplete="family-name" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <input type="email" name="email" id="email" placeholder="Email" autocomplete="email" required>
+          <input type="tel" name="phone" id="phone" placeholder="Phone (optional)" autocomplete="tel">
+        </div>
+          <button type="submit">Secure My Spot</button>
+        <p id="formMsg" role="status" aria-live="polite" style="margin:8px 0 0;font-size:16px"></p>
+      </form>
+    </section>
+
+    <section class="legal">
+      <p><strong>Privacy Notice:</strong> We use basic cookies and analytics to ensure proper website function and improve the Play Fast experience. No personal data is sold or shared with third parties. By using this site or submitting this form, you agree to our <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>.</p>
+      <p><em>Cookie notice:</em> This website uses necessary cookies to provide its core functionality and performance tracking. By continuing to browse, you consent to this use. <a href="#">Learn more</a>.</p>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Play Fast. All rights reserved.</p>
+    </footer>
+  </main>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>You're In!</h2>
+      <p>Welcome to the future of lacrosse training. We'll be in touch with exclusive updates and early access details. Get ready to Play Fast!</p>
+      <button class="modal-close">Awesome!</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('waitlistForm');
+    const msg = document.getElementById('formMsg');
+
+    const heroVideo = document.getElementById('heroVideo');
+    window.addEventListener('scroll', () => {
+      if (heroVideo) { heroVideo.style.transform = `translateY(${window.scrollY * 0.4}px)`; }
+    });
+
+    function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) }
+
+    // Modal Logic
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+      const closeButton = successModal.querySelector('.modal-close');
+      const hideModal = () => successModal.classList.remove('visible');
+      closeButton.addEventListener('click', hideModal);
+      successModal.addEventListener('click', (e) => {
+        if (e.target === successModal) { // Only close if overlay is clicked directly
+          hideModal();
+        }
+      });
+    }
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        msg.textContent = '';
+        const btn = form.querySelector('button[type="submit"]');
+
+        const data = {
+          fname: document.getElementById('fname').value.trim(),
+          lname: document.getElementById('lname').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim()
+        };
+
+        if (!data.fname || !data.lname || !validEmail(data.email)) {
+          msg.style.color = '#b91c1c';
+          msg.textContent = 'Please enter your first name, last name, and a valid email.';
+          return;
+        }
+
+        try {
+          btn.disabled = true; btn.dataset.old = btn.textContent; btn.textContent = 'Joining…';
+          const res = await fetch('waitlist.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+            body: JSON.stringify(data)
+          });
+          let json = {};
+          try { json = await res.json(); } catch (_) {}
+
+          if (res.status === 409 || /already registered/i.test(json.error || '')) {
+            msg.style.color = '#145a32';
+            msg.textContent = "You're already on the list — we’ll keep you posted!";
+            form.reset();
+            return;
+          }
+
+          if (res.ok && json.ok) {
+            form.reset();
+            successModal.classList.add('visible'); // Show the modal!
+          } else {
+            throw new Error(json.error || 'Request failed');
+          }
+        } catch (err) {
+          msg.style.color = '#b91c1c';
+          msg.textContent = 'Sorry, something went wrong. Please try again later.';
+        } finally {
+          btn.disabled = false; btn.textContent = btn.dataset.old || 'Join Waitlist';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
