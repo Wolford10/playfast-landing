@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PlayFast — Smarter Lacrosse Training Phillip</title>
+  <title>PlayFast — Smarter Lacrosse Training</title>
   <meta name="description" content="Play Fast is a lightweight wearable for any lacrosse stick. Track reps, analyze throws and catches, and get real-time insights. Join the waitlist." />
   <meta property="og:title" content="Play Fast — Smarter Lacrosse Training" />
   <meta property="og:description" content="Attach it to any lacrosse stick. Measure. Improve. Dominate. Join the waitlist." />
@@ -133,6 +133,18 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
+    .feature-checklist {
+      text-align: left;
+      margin: 24px 0;
+    }
+    .feature-checklist h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--muted);
+      margin: 0 0 16px;
+    }
+    .feature-checklist .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .feature-checklist label { display: flex; align-items: center; gap: 8px; font-size: 16px; cursor: pointer; }
     input,select,textarea{padding:16px;border-radius:12px;border:1px solid #ccc;background:#fcfdff;color:var(--text);font-size:17px;transition:border-color .2s, box-shadow .2s}
     input::placeholder{color:#888}
     input:focus,textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(46,204,113,0.15)}
@@ -142,6 +154,7 @@
     footer{font-size:14px;color:var(--muted);text-align:center;margin:40px 0}
     @media (max-width: 600px) {
       .form-row { grid-template-columns: 1fr; } /* Stack form fields on mobile */
+      .feature-checklist .options { grid-template-columns: 1fr; } /* Stack checkboxes on mobile */
       .signup{padding: 30px 20px;} /* Adjust signup padding for small screens */
       .modal-content{padding: 30px 20px;} /* Adjust modal padding for small screens */
       .modal-content h2 { font-size: clamp(32px, 10vw, 48px); } /* Adjust modal heading size */
@@ -263,6 +276,17 @@
           <input type="email" name="email" id="email" placeholder="Email" autocomplete="email" required>
           <input type="tel" name="phone" id="phone" placeholder="Phone (optional)" autocomplete="tel">
         </div>
+        <div class="feature-checklist">
+          <h3>Which features are you most excited about? (Optional)</h3>
+          <div class="options">
+            <label><input type="checkbox" name="features[]" value="Shot Speed"> Shot Speed</label>
+            <label><input type="checkbox" name="features[]" value="Guided Wall Ball Routines"> Guided Wall Ball Routines</label>
+            <label><input type="checkbox" name="features[]" value="Leaderboard and Challenges"> Leaderboard and Challenges</label>
+            <label><input type="checkbox" name="features[]" value="Form Analysis"> Form Analysis</label>
+            <label><input type="checkbox" name="features[]" value="Coach Dashboards"> Coach Dashboards</label>
+            <label><input type="checkbox" name="features[]" value="Player Progress Dashboards"> Player Progress Dashboards</label>
+          </div>
+        </div>
           <button type="submit">Secure My Spot</button>
         <p id="formMsg" role="status" aria-live="polite" style="margin:8px 0 0;font-size:16px"></p>
       </form>
@@ -323,7 +347,9 @@
           fname: document.getElementById('fname').value.trim(),
           lname: document.getElementById('lname').value.trim(),
           email: document.getElementById('email').value.trim(),
-          phone: document.getElementById('phone').value.trim()
+          phone: document.getElementById('phone').value.trim(),
+          features: Array.from(form.querySelectorAll('input[name="features[]"]:checked'))
+                         .map(cb => cb.value)
         };
 
         if (!data.fname || !data.lname || !validEmail(data.email)) {
