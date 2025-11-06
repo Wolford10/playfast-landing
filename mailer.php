@@ -25,10 +25,10 @@
 
 class Mailer {
   private static array $cfg = [
-    'from'       => 'no-reply@playfastlax.com',
+    'from'       => 'support@playfastlax.com',
     'from_name'  => 'Play Fast',
     'reply_to'   => 'support@playfastlax.com',
-    'admin_to'   => 'admin@example.com',
+    'admin_to'   => 'support@playfastlax.com',
     'transport'  => 'mail', // 'mail' | 'smtp'
     'smtp_host'  => '',
     'smtp_user'  => '',
@@ -118,7 +118,7 @@ class Mailer {
     $safe = htmlspecialchars($fname ?: 'there');
     $html = "<div style='font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;font-size:16px;color:#0b3d0b;'>"
           . "<p>Hi {$safe},</p>"
-          . "<p>Thanks for joining the <strong>Play Fast</strong> waitlist! We'll email you about early access and launch updates.</p>"
+          . "<p>Thanks for joining the <strong>PlayFast</strong> waitlist! We'll email you about early access and launch updates.</p>"
           . "<p style='margin-top:16px;color:#437a43'>— The Play Fast Team</p>"
           . "</div>";
     $txt  = "Hi {$fname},\n\n"
@@ -134,6 +134,7 @@ class Mailer {
     $p = htmlspecialchars($phone ?: '—');
     $ip = htmlspecialchars($meta['ip'] ?? ($_SERVER['REMOTE_ADDR'] ?? ''));
     $ua = htmlspecialchars($meta['ua'] ?? ($_SERVER['HTTP_USER_AGENT'] ?? ''));
+    $features = htmlspecialchars($meta['features'] ?? '—');
     $when = date('Y-m-d H:i:s');
 
     $html = "<div style='font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;font-size:15px;color:#0b3d0b;'>"
@@ -142,6 +143,7 @@ class Mailer {
           . "<li>Name: {$n}</li>"
           . "<li>Email: {$e}</li>"
           . "<li>Phone: {$p}</li>"
+          . "<li>Features: {$features}</li>"
           . "<li>IP: {$ip}</li>"
           . "<li>UA: {$ua}</li>"
           . "<li>When: {$when}</li>"
@@ -151,6 +153,7 @@ class Mailer {
           . "Name: {$fname} {$lname}\n"
           . "Email: {$email}\n"
           . "Phone: " . ($phone ?: '—') . "\n"
+          . "Features: " . ($meta['features'] ?? '—') . "\n"
           . "IP: {$ip}\n"
           . "UA: {$ua}\n"
           . "When: {$when}\n";

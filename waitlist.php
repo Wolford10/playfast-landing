@@ -57,12 +57,11 @@ $fname = trim($payload['fname'] ?? '');
 $lname = trim($payload['lname'] ?? '');
 $email = trim($payload['email'] ?? '');
 $phone = trim($payload['phone'] ?? '');
+$features = $payload['features'] ?? []; // Read the features array
 
 if ($fname === '' || $lname === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-  fail(400, 'Invalid input', DEV_MODE ? ['parsed'=>compact('fname','lname','email','phone')] : []);
+  fail(400, 'Invalid input', DEV_MODE ? ['parsed'=>compact('fname','lname','email','phone','features')] : []);
 }
-
-/** DB **/
 if (!extension_loaded('pdo_mysql')) fail(500, 'pdo_mysql not loaded');
 
 try {
@@ -96,9 +95,42 @@ try {
     $_SERVER['REMOTE_ADDR'] ?? '',
     $_SERVER['HTTP_USER_AGENT'] ?? ''
   ]);
+
+  // Get the ID of the new waitlist entry
+  $waitlist_id = $pdo->lastInsertId();
+
+  // If features were selected, insert them into the feature_interest table
+  if ($waitlist_id && is_array($features) && !empty($features)) {
+    $feature_stmt = $pdo->prepare("
+      INSERT INTO `feature_interest` (waitlist_id, feature_name, created_at)
+      VALUES (?, ?, NOW())
+    ");
+    foreach ($features as $feature_name) {
+      // Basic validation for feature name
+      if (is_string($feature_name) && trim($feature_name) !== '') {
+        $feature_stmt->execute([$waitlist_id, trim($feature_name)]);
+      }
+    }
+  }
+
+  // Send confirmation emails
+  try {
+    require_once __DIR__ . '/mailer.php';
+    // Mailer::init([]); // Using default settings from mailer.php
+    Mailer::sendWaitlist(
+      $email,
+      $fname,
+      $lname,
+      $phone,
+      ['features' => is_array($features) ? implode(', ', $features) : '']
+    );
+  } catch (Throwable $e) {
+    // Non-fatal: Log email error but still return success to the user
+    if (DEV_MODE) error_log('Email sending failed: ' . $e->getMessage());
+  }
+
   ok();
 } catch (Throwable $e) {
   $state = ($e instanceof PDOException) ? $e->getCode() : null;
   fail(500, 'Insert failed', DEV_MODE ? ['sqlstate'=>$state, 'msg'=>$e->getMessage()] : []);
 }
-
